@@ -1,0 +1,32 @@
+.Post {
+  background-color: #fff;
+  border-radius: 25px;
+  margin-bottom: 1rem;
+  padding: 1.5rem 2rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &__head {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: baseline;
+    &_user {
+      color: #409fff;
+      display: block;
+      text-decoration: none;
+      margin-right: auto;
+    }
+    &_icon {
+      height: 1.2rem;
+      width: 1.2rem;
+      margin-right: 1rem;
+    }
+  }
+
+  &_text {
+    margin-bottom: 1rem;
+  }
+  &_liked {
+    color: #d7443e;
+  }
+}

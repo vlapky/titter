@@ -1,0 +1,26 @@
+@import 'button';
+
+.SignIn {
+  display: flex;
+  flex-direction: column;
+  background-color: #007fff;
+  padding: 1rem 2rem;
+  min-width: 360px;
+  margin: auto;
+  border-radius: 25px;
+  &__title {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  &__input {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    padding: 0.5rem;
+  }
+}

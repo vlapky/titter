@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './styles/App.scss'
+import { SignIn } from './containters/SignIn'
+import { Feed } from './containters/Feed'
+import { Profile } from './containters/Profile'
+import { Subs } from './containters/Subs'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 
-function App() {
+import { useSelector } from 'react-redux'
+import { IState } from './redux/mainReducer'
+
+const App: React.FC = () => {
+  const loginUser = useSelector((state: IState) => state.users.currentUser)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main className="App">
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login" component={SignIn}>
+            {loginUser && <Redirect to="/feed" />}
+          </Route>
+          {!loginUser && <Redirect to="/login" />}
+          <Route exact path="/feed" component={Feed} />
+          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/subs" component={Subs} />
+          <Route path="/">
+            <Redirect to="/login" />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </main>
+  )
 }
 
-export default App;
+export default App
