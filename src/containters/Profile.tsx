@@ -1,41 +1,60 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
 import { Posts } from '../components/Posts'
-
+import { IState } from '../interfaces/IState'
 import '../styles/Profile.scss'
+import ExtractName from '../functions/ExtractName'
+import { IRouteParams } from '../interfaces/IRouteParams'
+import GetProfileState from '../functions/GetProfileState'
+import { signOut } from '../redux/rootReducer'
+import FilterUsersPosts from '../functions/FilterUsersPosts'
+import GeneratePosts from '../functions/GeneratePosts'
 
-const Arr = '123456'.split('').map(() => ({
-  author: `User 1`,
-  text:
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam nihil nesciunt id velit laborum. Sint iusto dolorum veritatis delectus ea nisi, nemo ut iste quod quis quam corporis perferendis minima voluptatibus dolores architecto blanditiis excepturi. Dolore, repellat neque quas et labore quisquam reiciendis.',
-  liked: ['User 1', 'User 2', 'User 3'],
-}))
-
-const subs = {
-  subscriptions: 140,
-  subscribers: 1300,
-}
-
-const profileButtonTitle = ['Подписаться', 'Отписаться', 'Выйти']
 const profileLinkTitle = ['В ленту', 'Назад']
-const add = false
 
 export const Profile: React.FC = () => {
+  const { id } = useParams<IRouteParams>()
+  const users = useSelector((state: IState) => state.users)
+  const posts = useSelector((state: IState) => state.posts)
+  const dispatch = useDispatch()
+  const profileState = GetProfileState(id, users)
+  const userPostsIds = FilterUsersPosts([id], posts)
+  const userPosts = GeneratePosts(userPostsIds, posts, users)
+
+  //Создать экшены подписок
+
   return (
     <div className="Profile">
       <Link className="link" to="/feed">
         {profileLinkTitle[0]}
       </Link>
-      <p className="Profile__user">User 1</p>
+      <p className="Profile__user">{ExtractName(id, users)}</p>
       <Link to="/subs" className="link">
-        Вы подписаны на {subs.subscriptions} пользователей
+        Подписки - {users.byId[id].subsYou.length} пользователей
       </Link>
       <Link to="/subs" className="link">
-        На вас подписано {subs.subscribers} пользователей
+        Подписчики - {users.byId[id].subsMe.length} пользователей
       </Link>
-      <button className="button">{profileButtonTitle[2]}</button>
-      {add && <button className="button">Добавить пост</button>}
-      <Posts posts={Arr} acceptDel={true} />
+      {profileState === 'YOUR' && (
+        <button onClick={() => dispatch(signOut())} className="button">
+          Выйти
+        </button>
+      )}
+      {profileState === 'YOUR' && (
+        <button className="button">Добавить пост</button>
+      )}
+      {profileState === 'SUB' && (
+        <button onClick={() => dispatch(signOut())} className="button">
+          Отписаться
+        </button>
+      )}
+      {profileState === 'NONE' && (
+        <button onClick={() => dispatch(signOut())} className="button">
+          Подписаться
+        </button>
+      )}
+      <Posts posts={userPosts} acceptDel={true} />
     </div>
   )
 }

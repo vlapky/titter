@@ -1,4 +1,6 @@
 interface IPost {
+  id: string
+  authorId: string
   author: string
   text: string
   liked: Array<string>

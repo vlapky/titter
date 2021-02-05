@@ -2,25 +2,49 @@ import React from 'react'
 import '../styles/Feed.scss'
 import { Posts } from '../components/Posts'
 import { Link } from 'react-router-dom'
-
-const Arr = '123456789012312'.split('').map((item, index) => ({
-  author: `User ${item}-${index}`,
-  text:
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam nihil nesciunt id velit laborum. Sint iusto dolorum veritatis delectus ea nisi, nemo ut iste quod quis quam corporis perferendis minima voluptatibus dolores architecto blanditiis excepturi. Dolore, repellat neque quas et labore quisquam reiciendis.',
-  liked: ['User 1', 'User 2', 'User 3'],
-}))
+import { useSelector } from 'react-redux'
+import { IState } from '../interfaces/IState'
+import GeneratePosts from '../functions/GeneratePosts'
+import FilterUsersPosts from '../functions/FilterUsersPosts'
 
 export const Feed: React.FC = () => {
+  const [postsType, changePostsType] = React.useState('all')
+  const users = useSelector((state: IState) => state.users)
+  const posts = useSelector((state: IState) => state.posts)
+
+  const allPosts: any = GeneratePosts(posts.allIds, posts, users)
+  const subsPosts: any = GeneratePosts(
+    FilterUsersPosts(
+      [...users.byId[users.currentUser].subsYou, users.currentUser],
+      posts
+    ),
+    posts,
+    users
+  )
+
   return (
     <div className="Feed">
-      <Link className="link" to="/profile">
+      <Link className="link" to={`/${users.currentUser}`}>
         В профиль
       </Link>
       <div>
-        <button className="button feedbutton">Все посты</button>
-        <button className="button feedbutton">Подписки</button>
+        <button
+          onClick={() => changePostsType('all')}
+          className={`button feedbutton ${postsType === 'all' && 'active'}`}
+        >
+          Все посты
+        </button>
+        <button
+          onClick={() => changePostsType('subs')}
+          className={`button feedbutton ${postsType === 'subs' && 'active'}`}
+        >
+          Подписки
+        </button>
       </div>
-      <Posts posts={Arr} acceptDel={false} />
+      <Posts
+        posts={postsType === 'all' ? allPosts : subsPosts}
+        acceptDel={false}
+      />
     </div>
   )
 }

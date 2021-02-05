@@ -5,13 +5,11 @@ import { Feed } from './containters/Feed'
 import { Profile } from './containters/Profile'
 import { Subs } from './containters/Subs'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
-
 import { useSelector } from 'react-redux'
-import { IState } from './redux/mainReducer'
+import { IState } from './interfaces/IState'
 
 const App: React.FC = () => {
-  const loginUser = useSelector((state: IState) => state.users.currentUser)
-
+  const loginUser = useSelector((state: IState) => state.login)
   return (
     <main className="App">
       <BrowserRouter>
@@ -21,8 +19,8 @@ const App: React.FC = () => {
           </Route>
           {!loginUser && <Redirect to="/login" />}
           <Route exact path="/feed" component={Feed} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/subs" component={Subs} />
+          <Route exact path="/:id" component={Profile} />
+          <Route exact path="/:id/:subs" component={Subs} />
           <Route path="/">
             <Redirect to="/login" />
           </Route>

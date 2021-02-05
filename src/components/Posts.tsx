@@ -1,22 +1,20 @@
 import React from 'react'
-
 import { IPostsProps } from '../interfaces/IPostProps'
-
 import del from '../icons/close.svg'
 import like from '../icons/heart.svg'
-
 import '../styles/Post.scss'
+import { Link } from 'react-router-dom'
 
 export const Posts: React.FC<IPostsProps> = ({ posts, acceptDel }) => {
   return (
     <ul>
-      {posts.map(({ author, text, liked }) => (
-        <li className="Post">
+      {posts.map(({ id, authorId, author, text, liked }) => (
+        <li key={id} className="Post">
           <article>
             <div className="Post__head">
-              <a className="Post__head_user" href="/">
+              <Link className="Post__head_user" to={`/${authorId}`}>
                 {author}
-              </a>
+              </Link>
               {acceptDel && (
                 <img src={del} alt="delete" className="Post__head_icon" />
               )}
@@ -26,7 +24,7 @@ export const Posts: React.FC<IPostsProps> = ({ posts, acceptDel }) => {
             <p className="Post_liked">
               {`Понравилось: `}
               {liked.map((item) => (
-                <span>{`${item} `}</span>
+                <span key={`like-by-${item}`}>{`${item} `}</span>
               ))}
             </p>
           </article>

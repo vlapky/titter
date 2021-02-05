@@ -1,23 +1,29 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { signIn } from '../redux/rootReducer'
 import '../styles/SignIn.scss'
 
-import { useDispatch } from 'react-redux'
-import { signIn } from '../redux/mainReducer'
-
 export const SignIn: React.FC = () => {
+  const dispatch = useDispatch()
+  const [signInValue, changeSignIn] = React.useState('')
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    changeSignIn(e.target.value)
+  }
+
   return (
     <div className="SignIn">
       <label htmlFor="sign-in" className="SignIn__title">
         Введите имя
       </label>
       <input
+        value={signInValue}
+        onChange={handleChange}
         className="SignIn__input"
         id="sign-in"
         type="text"
         placeholder="vlapky"
       />
-      {/* dispatch({ type: 'SIGN_IN', payload: 'vlapky' })} */}
-      <button onClick={() => signIn('vlapky')} className="button">
+      <button onClick={() => dispatch(signIn(signInValue))} className="button">
         Продолжить
       </button>
     </div>
