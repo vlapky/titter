@@ -8,4 +8,5 @@ _Мини блог_
 - Redux toolkit
 
 Запускать:
+
 _npm start или yarn start_
