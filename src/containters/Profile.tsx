@@ -22,7 +22,8 @@ import { ProfileName } from '../components/ProfileName'
 import { ProfileButtons } from '../components/ProfileButtons'
 
 export const Profile: React.FC = () => {
-  const { id } = useParams<IRouteParams>()
+  const { id, subs, curId } = useParams<IRouteParams>()
+
   const users = useSelector((state: IState) => state.users)
   const posts = useSelector((state: IState) => state.posts)
   const dispatch = useDispatch()
@@ -58,9 +59,16 @@ export const Profile: React.FC = () => {
 
   return (
     <div className="Profile">
-      <Link className="link" to="/feed">
-        В ленту
-      </Link>
+      {!subs && (
+        <Link className="link" to="/feed">
+          В ленту
+        </Link>
+      )}
+      {subs && (
+        <Link className="link" to={`/${curId}/${subs}`}>
+          Назад
+        </Link>
+      )}
       <ProfileName
         userName={userName}
         profileState={profileState}

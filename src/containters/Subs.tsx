@@ -18,7 +18,7 @@ export const Subs: React.FC = () => {
       <ul className="Subs__list">
         {subsList.map((sub: any) => (
           <li key={sub.userId} className="Subs__list_item">
-            <Link className="link" to={`/${sub.userId}`}>
+            <Link className="link" to={`/${id}/${subs}/${sub.userId}`}>
               {sub.name}
             </Link>
           </li>

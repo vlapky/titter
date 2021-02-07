@@ -21,7 +21,7 @@ const App: React.FC = () => {
           <Route exact path="/feed" component={Feed} />
           <Route exact path="/:id" component={Profile} />
           <Route exact path="/:id/:subs" component={Subs} />
-          {/* <Route exact path="/:id/:idSub" component={Profile} /> */}
+          <Route exact path="/:curId/:subs/:id" component={Profile} />
           <Route path="/">
             <Redirect to="/login" />
           </Route>
