@@ -7,54 +7,84 @@ import '../styles/Profile.scss'
 import ExtractName from '../functions/ExtractName'
 import { IRouteParams } from '../interfaces/IRouteParams'
 import GetProfileState from '../functions/GetProfileState'
-import { signOut } from '../redux/rootReducer'
+import {
+  addPost,
+  changeName,
+  delPost,
+  likePost,
+  signOut,
+  subscribe,
+  unsubscribe,
+} from '../redux/rootReducer'
 import FilterUsersPosts from '../functions/FilterUsersPosts'
 import GeneratePosts from '../functions/GeneratePosts'
-
-const profileLinkTitle = ['В ленту', 'Назад']
+import { ProfileName } from '../components/ProfileName'
+import { ProfileButtons } from '../components/ProfileButtons'
 
 export const Profile: React.FC = () => {
   const { id } = useParams<IRouteParams>()
   const users = useSelector((state: IState) => state.users)
   const posts = useSelector((state: IState) => state.posts)
   const dispatch = useDispatch()
+
   const profileState = GetProfileState(id, users)
   const userPostsIds = FilterUsersPosts([id], posts)
   const userPosts = GeneratePosts(userPostsIds, posts, users)
+  const userName = ExtractName(id, users)
+  const subsYouLen = users.byId[id].subsYou.length
+  const subsMeLen = users.byId[id].subsMe.length
 
-  //Создать экшены подписок
+  const handleLikePost = (id: string) => {
+    dispatch(likePost(id))
+  }
+  const handleAddPost = (text: string) => {
+    dispatch(addPost(text))
+  }
+  const handleDelPost = (id: string) => {
+    dispatch(delPost(id))
+  }
+  const handleChangeName = (text: string) => {
+    dispatch(changeName(text))
+  }
+  const handleSub = (id: string) => {
+    dispatch(subscribe(id))
+  }
+  const handleUnsub = (id: string) => {
+    dispatch(unsubscribe(id))
+  }
+  const handleSignOut = () => {
+    dispatch(signOut)
+  }
 
   return (
     <div className="Profile">
       <Link className="link" to="/feed">
-        {profileLinkTitle[0]}
+        В ленту
       </Link>
-      <p className="Profile__user">{ExtractName(id, users)}</p>
-      <Link to="/subs" className="link">
-        Подписки - {users.byId[id].subsYou.length} пользователей
+      <ProfileName
+        userName={userName}
+        profileState={profileState}
+        changeName={handleChangeName}
+      />
+      <Link to={`/${id}/subsYou`} className="link">
+        Подписки - {subsYouLen} пользователей
       </Link>
-      <Link to="/subs" className="link">
-        Подписчики - {users.byId[id].subsMe.length} пользователей
+      <Link to={`/${id}/subsMe`} className="link">
+        Подписчики - {subsMeLen} пользователей
       </Link>
-      {profileState === 'YOUR' && (
-        <button onClick={() => dispatch(signOut())} className="button">
-          Выйти
-        </button>
-      )}
-      {profileState === 'YOUR' && (
-        <button className="button">Добавить пост</button>
-      )}
-      {profileState === 'SUB' && (
-        <button onClick={() => dispatch(signOut())} className="button">
-          Отписаться
-        </button>
-      )}
-      {profileState === 'NONE' && (
-        <button onClick={() => dispatch(signOut())} className="button">
-          Подписаться
-        </button>
-      )}
-      <Posts posts={userPosts} acceptDel={true} />
+      <ProfileButtons
+        profileState={profileState}
+        handleAddPost={handleAddPost}
+        handleSub={handleSub}
+        handleUnsub={handleUnsub}
+        handleSignOut={handleSignOut}
+      />
+      <Posts
+        posts={userPosts}
+        currentUser={users.currentUser}
+        likePost={handleLikePost}
+        delPost={handleDelPost}
+      />
     </div>
   )
 }

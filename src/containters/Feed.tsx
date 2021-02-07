@@ -2,16 +2,18 @@ import React from 'react'
 import '../styles/Feed.scss'
 import { Posts } from '../components/Posts'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { IState } from '../interfaces/IState'
 import GeneratePosts from '../functions/GeneratePosts'
 import FilterUsersPosts from '../functions/FilterUsersPosts'
+import { delPost, likePost } from '../redux/rootReducer'
 
 export const Feed: React.FC = () => {
   const [postsType, changePostsType] = React.useState('all')
   const users = useSelector((state: IState) => state.users)
   const posts = useSelector((state: IState) => state.posts)
-
+  const dispatch = useDispatch()
+  const currentUser = users.currentUser
   const allPosts: any = GeneratePosts(posts.allIds, posts, users)
   const subsPosts: any = GeneratePosts(
     FilterUsersPosts(
@@ -22,9 +24,17 @@ export const Feed: React.FC = () => {
     users
   )
 
+  const handleLikePost = (id: string) => {
+    dispatch(likePost(id))
+  }
+
+  const handleDelPost = (id: string) => {
+    dispatch(delPost(id))
+  }
+
   return (
     <div className="Feed">
-      <Link className="link" to={`/${users.currentUser}`}>
+      <Link className="link" to={`/${currentUser}`}>
         В профиль
       </Link>
       <div>
@@ -43,7 +53,9 @@ export const Feed: React.FC = () => {
       </div>
       <Posts
         posts={postsType === 'all' ? allPosts : subsPosts}
-        acceptDel={false}
+        currentUser={currentUser}
+        likePost={handleLikePost}
+        delPost={handleDelPost}
       />
     </div>
   )

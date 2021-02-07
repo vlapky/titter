@@ -8,5 +8,8 @@ interface IPost {
 
 export interface IPostsProps {
   posts: Array<IPost>
+  currentUser: string
   acceptDel?: boolean
+  likePost?: any
+  delPost?: any
 }

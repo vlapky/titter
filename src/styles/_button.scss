@@ -7,4 +7,7 @@
   &:active {
     background-color: #0066cc;
   }
+  &:disabled {
+    background-color: #949494;
+  }
 }

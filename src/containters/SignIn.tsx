@@ -16,6 +16,7 @@ export const SignIn: React.FC = () => {
         Введите имя
       </label>
       <input
+        maxLength={12}
         value={signInValue}
         onChange={handleChange}
         className="SignIn__input"
@@ -23,7 +24,11 @@ export const SignIn: React.FC = () => {
         type="text"
         placeholder="vlapky"
       />
-      <button onClick={() => dispatch(signIn(signInValue))} className="button">
+      <button
+        disabled={!(signInValue.length > 3)}
+        onClick={() => dispatch(signIn(signInValue))}
+        className="button"
+      >
         Продолжить
       </button>
     </div>
