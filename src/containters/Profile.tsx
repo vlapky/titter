@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Posts } from '../components/Posts'
 import { IState } from '../interfaces/IState'
 import '../styles/Profile.scss'
@@ -20,6 +20,8 @@ import FilterUsersPosts from '../functions/FilterUsersPosts'
 import GeneratePosts from '../functions/GeneratePosts'
 import { ProfileName } from '../components/ProfileName'
 import { ProfileButtons } from '../components/ProfileButtons'
+import { ProfileLinks } from '../components/ProfileLinks'
+import { ProfileSubs } from '../components/ProfileSubs'
 
 export const Profile: React.FC = () => {
   const { id, subs, curId } = useParams<IRouteParams>()
@@ -32,8 +34,6 @@ export const Profile: React.FC = () => {
   const userPostsIds = FilterUsersPosts([id], posts)
   const userPosts = GeneratePosts(userPostsIds, posts, users)
   const userName = ExtractName(id, users)
-  const subsYouLen = users.byId[id].subsYou.length
-  const subsMeLen = users.byId[id].subsMe.length
 
   const handleLikePost = (id: string) => {
     dispatch(likePost(id))
@@ -47,39 +47,25 @@ export const Profile: React.FC = () => {
   const handleChangeName = (text: string) => {
     dispatch(changeName(text))
   }
-  const handleSub = (id: string) => {
+  const handleSub = () => {
     dispatch(subscribe(id))
   }
-  const handleUnsub = (id: string) => {
+  const handleUnsub = () => {
     dispatch(unsubscribe(id))
   }
   const handleSignOut = () => {
-    dispatch(signOut)
+    dispatch(signOut())
   }
 
   return (
     <div className="Profile">
-      {!subs && (
-        <Link className="link" to="/feed">
-          В ленту
-        </Link>
-      )}
-      {subs && (
-        <Link className="link" to={`/${curId}/${subs}`}>
-          Назад
-        </Link>
-      )}
+      <ProfileLinks subs={subs} curId={curId} />
       <ProfileName
         userName={userName}
         profileState={profileState}
         changeName={handleChangeName}
       />
-      <Link to={`/${id}/subsYou`} className="link">
-        Подписки - {subsYouLen} пользователей
-      </Link>
-      <Link to={`/${id}/subsMe`} className="link">
-        Подписчики - {subsMeLen} пользователей
-      </Link>
+      <ProfileSubs id={id} users={users} />
       <ProfileButtons
         profileState={profileState}
         handleAddPost={handleAddPost}

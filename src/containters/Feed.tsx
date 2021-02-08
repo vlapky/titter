@@ -7,6 +7,7 @@ import { IState } from '../interfaces/IState'
 import GeneratePosts from '../functions/GeneratePosts'
 import FilterUsersPosts from '../functions/FilterUsersPosts'
 import { delPost, likePost } from '../redux/rootReducer'
+import { FeedButtons } from '../components/FeedButtons'
 
 export const Feed: React.FC = () => {
   const [postsType, changePostsType] = React.useState('all')
@@ -37,20 +38,7 @@ export const Feed: React.FC = () => {
       <Link className="link" to={`/${currentUser}`}>
         В профиль
       </Link>
-      <div>
-        <button
-          onClick={() => changePostsType('all')}
-          className={`button feedbutton ${postsType === 'all' && 'active'}`}
-        >
-          Все посты
-        </button>
-        <button
-          onClick={() => changePostsType('subs')}
-          className={`button feedbutton ${postsType === 'subs' && 'active'}`}
-        >
-          Подписки
-        </button>
-      </div>
+      <FeedButtons postsType={postsType} changeType={changePostsType} />
       <Posts
         posts={postsType === 'all' ? allPosts : subsPosts}
         currentUser={currentUser}

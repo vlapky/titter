@@ -42,9 +42,7 @@ export const Posts: React.FC<IPostsProps> = ({
               <p className="Post_text">{text}</p>
               <p className="Post_liked">
                 {`Понравилось: `}
-                {liked.map((item) => (
-                  <span key={`like-by-${item}`}>{`${item} `}</span>
-                ))}
+                <span>{liked.join(', ')}</span>
               </p>
             </article>
           </li>
