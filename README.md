@@ -2,6 +2,8 @@
 
 _Блог_
 
+https://vlapky.github.io/titter/
+
 Функционал:
 
 - Хранение данных пользователяй и их постов в local storage
