@@ -4,7 +4,7 @@ import { SignIn } from './containters/SignIn'
 import { Feed } from './containters/Feed'
 import { Profile } from './containters/Profile'
 import { Subs } from './containters/Subs'
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { IState } from './interfaces/IState'
 
@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const loginUser = useSelector((state: IState) => state.login)
   return (
     <main className="App">
-      <BrowserRouter>
+      <Router>
         <Switch>
           <Route exact path="/login" component={SignIn}>
             {loginUser && <Redirect to="/feed" />}
@@ -26,7 +26,7 @@ const App: React.FC = () => {
             <Redirect to="/login" />
           </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     </main>
   )
 }
