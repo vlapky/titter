@@ -1,9 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { IPostsProps } from '../interfaces/IPostProps'
 import del from '../icons/close.svg'
 import like from '../icons/heart.svg'
 import '../styles/Post.scss'
+
+interface IPost {
+  id: string
+  authorId: string
+  author: string
+  text: string
+  liked: Array<string>
+}
+
+interface IPostsProps {
+  posts: Array<IPost>
+  currentUser: string
+  likePost: (id: string) => void
+  delPost: (id: string) => void
+}
 
 export const Posts: React.FC<IPostsProps> = ({
   posts,

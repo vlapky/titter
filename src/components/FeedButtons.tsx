@@ -1,5 +1,9 @@
 import React from 'react'
-import { IFeedButtonsProps } from '../interfaces/IFeedButtonsProps'
+
+interface IFeedButtonsProps {
+  postsType: string
+  changeType: (postsType: string) => void
+}
 
 export const FeedButtons: React.FC<IFeedButtonsProps> = ({
   postsType,

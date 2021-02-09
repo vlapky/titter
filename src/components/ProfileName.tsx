@@ -1,6 +1,11 @@
 import React from 'react'
-import { IProfileName } from '../interfaces/IProfileName'
 import { Input } from './Input'
+
+export interface IProfileName {
+  userName: string
+  profileState: string
+  changeName: (text: string) => void
+}
 
 export const ProfileName: React.FC<IProfileName> = ({
   userName,

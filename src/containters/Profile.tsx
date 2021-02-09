@@ -12,9 +12,10 @@ import { ProfileLinks } from '../components/ProfileLinks'
 import { ProfileSubs } from '../components/ProfileSubs'
 import { PostsFuncs } from '../functions/PostsFuncs'
 import { Actions } from '../redux/Actions'
+import { IUsers } from '../interfaces/IUsers'
 
 export const Profile: React.FC = () => {
-  function GetProfileState(userId: string, users: any) {
+  function GetProfileState(userId: string, users: IUsers) {
     if (userId === users.currentUser) {
       return 'YOUR'
     } else if (users.byId[users.currentUser].subscribedTo.includes(userId)) {

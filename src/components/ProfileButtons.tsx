@@ -1,6 +1,13 @@
 import React from 'react'
-import { IProfileButtonsProps } from '../interfaces/IProfileButtonsProps'
 import { Input } from './Input'
+
+interface IProfileButtonsProps {
+  profileState: string
+  handleSignOut: () => void
+  handleAddPost: (text: string) => void
+  handleSub: () => void
+  handleUnsub: () => void
+}
 
 export const ProfileButtons: React.FC<IProfileButtonsProps> = ({
   profileState,

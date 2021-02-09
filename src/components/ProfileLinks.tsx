@@ -1,6 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { IProfileLinksProps } from '../interfaces/IProfileLinksProps'
+
+interface IProfileLinksProps {
+  subs: string
+  curId: string
+}
 
 export const ProfileLinks: React.FC<IProfileLinksProps> = ({ subs, curId }) => {
   return (

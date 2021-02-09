@@ -1,17 +1,5 @@
-interface IById {
-  [key: string]: any
-}
-
-interface IUsers {
-  currentUser: string
-  byId: IById
-  allIds: Array<string>
-}
-
-interface IPosts {
-  byId: IById
-  allIds: Array<string>
-}
+import { IPosts } from './IPosts'
+import { IUsers } from './IUsers'
 
 export interface IState {
   users: IUsers

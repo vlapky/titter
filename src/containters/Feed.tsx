@@ -13,7 +13,7 @@ export const Feed: React.FC = () => {
   const posts = useSelector((state: IState) => state.posts)
   const dispatch = useDispatch()
 
-  const [postsType, changePostsType] = React.useState('all')
+  const [postsType, changePostsType] = React.useState<string>('all')
   const currentUser = users.currentUser
   const allPosts: any = PostsFuncs.GeneratePosts(posts.allIds, posts, users)
   const subsPosts: any = PostsFuncs.GeneratePosts(

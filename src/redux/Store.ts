@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { IState } from '../interfaces/IState'
 import { InitialState } from './InitialState'
 import { RootReducer } from './RootReducer'
 
-const loadFromLocalStorage: any = () => {
+const loadFromLocalStorage = () => {
   try {
     const serializedState: any = localStorage.getItem('titter-storage')
     return JSON.parse(serializedState)
@@ -11,7 +12,7 @@ const loadFromLocalStorage: any = () => {
   }
 }
 
-const saveToLocalStorage: any = (state: any) => {
+const saveToLocalStorage = (state: IState) => {
   try {
     const serializedState = JSON.stringify(state)
     localStorage.setItem('titter-storage', serializedState)

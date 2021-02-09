@@ -1,6 +1,11 @@
 import React from 'react'
-import { IInputProps } from '../interfaces/IInputProps'
 import '../styles/Input.scss'
+
+interface IInputProps {
+  type: string
+  send: (text: string) => void
+  cancel: () => void
+}
 
 export const Input: React.FC<IInputProps> = ({ type, send, cancel }) => {
   const [text, changeText] = React.useState<string>('')
