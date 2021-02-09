@@ -25,4 +25,6 @@ https://vlapky.github.io/titter/
 
 _cd ./titter_
 
+_npm install_
+
 _npm start_
