@@ -15,8 +15,8 @@ export const Feed: React.FC = () => {
 
   const [postsType, changePostsType] = React.useState<string>('all')
   const currentUser = users.currentUser
-  const allPosts: any = PostsFuncs.GeneratePosts(posts.allIds, posts, users)
-  const subsPosts: any = PostsFuncs.GeneratePosts(
+  const allPosts = PostsFuncs.GeneratePosts(posts.allIds, posts, users)
+  const subsPosts = PostsFuncs.GeneratePosts(
     PostsFuncs.FilterUsersPosts(
       [...users.byId[users.currentUser].subscribedTo, users.currentUser],
       posts
