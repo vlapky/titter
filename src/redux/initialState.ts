@@ -1,6 +1,6 @@
 import { IState } from '../interfaces/IState'
 
-export const initialState: IState = {
+export const InitialState: IState = {
   login: false,
   users: {
     currentUser: '',

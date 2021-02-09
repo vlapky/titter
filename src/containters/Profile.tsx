@@ -8,14 +8,14 @@ import ExtractName from '../functions/ExtractName'
 import { IRouteParams } from '../interfaces/IRouteParams'
 import GetProfileState from '../functions/GetProfileState'
 import {
-  addPost,
-  changeName,
-  delPost,
-  likePost,
-  signOut,
-  subscribe,
-  unsubscribe,
-} from '../redux/rootReducer'
+  AddPost,
+  ChangeName,
+  DelPost,
+  LikePost,
+  SignOut,
+  Subscribe,
+  Unsubscribe,
+} from '../redux/RootReducer'
 import FilterUsersPosts from '../functions/FilterUsersPosts'
 import GeneratePosts from '../functions/GeneratePosts'
 import { ProfileName } from '../components/ProfileName'
@@ -36,25 +36,25 @@ export const Profile: React.FC = () => {
   const userName = ExtractName(id, users)
 
   const handleLikePost = (id: string) => {
-    dispatch(likePost(id))
+    dispatch(LikePost(id))
   }
   const handleAddPost = (text: string) => {
-    dispatch(addPost(text))
+    dispatch(AddPost(text))
   }
   const handleDelPost = (id: string) => {
-    dispatch(delPost(id))
+    dispatch(DelPost(id))
   }
   const handleChangeName = (text: string) => {
-    dispatch(changeName(text))
+    dispatch(ChangeName(text))
   }
   const handleSub = () => {
-    dispatch(subscribe(id))
+    dispatch(Subscribe(id))
   }
   const handleUnsub = () => {
-    dispatch(unsubscribe(id))
+    dispatch(Unsubscribe(id))
   }
   const handleSignOut = () => {
-    dispatch(signOut())
+    dispatch(SignOut())
   }
 
   return (

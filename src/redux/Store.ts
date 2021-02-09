@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { loadFromLocalStorage } from '../localStorage/Load'
 import { saveToLocalStorage } from '../localStorage/Save'
-import { initialState } from './initialState'
-import rootReducer from './rootReducer'
+import { InitialState } from './InitialState'
+import rootReducer from './RootReducer'
 
 const loadState = loadFromLocalStorage()
-const state = loadState ? loadState : initialState
+const state = loadState ? loadState : InitialState
 
-export const store = configureStore({
+export const Store = configureStore({
   reducer: rootReducer,
   preloadedState: state,
 })
 
-store.subscribe(() => {
-  saveToLocalStorage(store.getState())
+Store.subscribe(() => {
+  saveToLocalStorage(Store.getState())
 })

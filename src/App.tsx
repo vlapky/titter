@@ -1,6 +1,6 @@
 import React from 'react'
 import './styles/App.scss'
-import { SignIn } from './containters/SignIn'
+import { Login } from './containters/Login'
 import { Feed } from './containters/Feed'
 import { Profile } from './containters/Profile'
 import { Subs } from './containters/Subs'
@@ -14,7 +14,7 @@ const App: React.FC = () => {
     <main className="App">
       <Router>
         <Switch>
-          <Route exact path="/login" component={SignIn}>
+          <Route exact path="/login" component={Login}>
             {loginUser && <Redirect to="/feed" />}
           </Route>
           {!loginUser && <Redirect to="/login" />}

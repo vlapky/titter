@@ -1,20 +1,19 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { initialState } from './initialState'
+import { InitialState } from './InitialState'
 
-export const signIn = createAction<string>('SIGN_IN')
-export const signOut = createAction<void>('SIGN_OUT')
+export const SignIn = createAction<string>('SIGN_IN')
+export const SignOut = createAction<void>('SIGN_OUT')
 
-export const subscribe = createAction<string>('SUB')
-export const unsubscribe = createAction<string>('UNSUB')
+export const Subscribe = createAction<string>('SUB')
+export const Unsubscribe = createAction<string>('UNSUB')
 
-export const addPost = createAction<Object>('ADD_POST')
-export const delPost = createAction<string>('DEL_POST')
-export const likePost = createAction<string>('LIKE_POST')
+export const AddPost = createAction<Object>('ADD_POST')
+export const DelPost = createAction<string>('DEL_POST')
+export const LikePost = createAction<string>('LIKE_POST')
+export const ChangeName = createAction<string>('CHANGE_NAME')
 
-export const changeName = createAction<string>('CHANGE_NAME')
-
-export default createReducer(initialState, {
-  [signIn.type]: (state, action) => {
+export default createReducer(InitialState, {
+  [SignIn.type]: (state, action) => {
     //Вход старого пользователя
     state.users.allIds.forEach((id: string) => {
       let user = state.users.byId[id]
@@ -39,12 +38,12 @@ export default createReducer(initialState, {
     }
   },
 
-  [signOut.type]: (state) => {
+  [SignOut.type]: (state) => {
     state.users.currentUser = ''
     state.login = false
   },
 
-  [subscribe.type]: (state, action) => {
+  [Subscribe.type]: (state, action) => {
     const currentUser = state.users.currentUser
     const subUser = action.payload
 
@@ -52,7 +51,7 @@ export default createReducer(initialState, {
     state.users.byId[subUser].subsMe.push(currentUser)
   },
 
-  [unsubscribe.type]: (state, action) => {
+  [Unsubscribe.type]: (state, action) => {
     const currentUser = state.users.currentUser
     const subUser = action.payload
 
@@ -63,7 +62,7 @@ export default createReducer(initialState, {
     state.users.byId[subUser].subsMe.splice(indexCurUser, 1)
   },
 
-  [addPost.type]: (state, action) => {
+  [AddPost.type]: (state, action) => {
     const postId = `${new Date().getUTCMilliseconds()}`
 
     state.posts.allIds.push(postId)
@@ -75,7 +74,7 @@ export default createReducer(initialState, {
     }
   },
 
-  [delPost.type]: (state, action) => {
+  [DelPost.type]: (state, action) => {
     const delPostId = action.payload
 
     const indexDelPost = state.posts.allIds.indexOf(delPostId)
@@ -84,7 +83,7 @@ export default createReducer(initialState, {
     delete state.posts.byId[delPostId]
   },
 
-  [likePost.type]: (state, action) => {
+  [LikePost.type]: (state, action) => {
     const likePostId = action.payload
     const currentUser = state.users.currentUser
     const indexLike = state.posts.byId[likePostId].liked.indexOf(currentUser)
@@ -98,7 +97,7 @@ export default createReducer(initialState, {
     }
   },
 
-  [changeName.type]: (state, action) => {
+  [ChangeName.type]: (state, action) => {
     const newName = action.payload
     const currentUser = state.users.currentUser
     let acceptName = true

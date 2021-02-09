@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { IState } from '../interfaces/IState'
 import GeneratePosts from '../functions/GeneratePosts'
 import FilterUsersPosts from '../functions/FilterUsersPosts'
-import { delPost, likePost } from '../redux/rootReducer'
+import { DelPost, LikePost } from '../redux/RootReducer'
 import { FeedButtons } from '../components/FeedButtons'
 
 export const Feed: React.FC = () => {
@@ -26,11 +26,11 @@ export const Feed: React.FC = () => {
   )
 
   const handleLikePost = (id: string) => {
-    dispatch(likePost(id))
+    dispatch(LikePost(id))
   }
 
   const handleDelPost = (id: string) => {
-    dispatch(delPost(id))
+    dispatch(DelPost(id))
   }
 
   return (
