@@ -10,15 +10,8 @@ import { ProfileName } from '../components/ProfileName'
 import { ProfileButtons } from '../components/ProfileButtons'
 import { ProfileLinks } from '../components/ProfileLinks'
 import { ProfileSubs } from '../components/ProfileSubs'
-
-import { SignOut } from '../redux/actions/SignOut'
-import { LikePost } from '../redux/actions/LikePost'
-import { AddPost } from '../redux/actions/AddPost'
-import { DelPost } from '../redux/actions/DelPost'
-import { ChangeName } from '../redux/actions/ChangeName'
-import { Subscribe } from '../redux/actions/Subscribe'
-import { Unsubscribe } from '../redux/actions/Unsubscribe'
-import PostsFuncs from '../functions/PostsFuncs'
+import { PostsFuncs } from '../functions/PostsFuncs'
+import { Actions } from '../redux/Actions'
 
 export const Profile: React.FC = () => {
   function GetProfileState(userId: string, users: any) {
@@ -41,25 +34,25 @@ export const Profile: React.FC = () => {
   const userName = users.byId[id].name
 
   const handleLikePost = (id: string) => {
-    dispatch(LikePost(id))
+    dispatch(Actions.LikePost(id))
   }
   const handleAddPost = (text: string) => {
-    dispatch(AddPost(text))
+    dispatch(Actions.AddPost(text))
   }
   const handleDelPost = (id: string) => {
-    dispatch(DelPost(id))
+    dispatch(Actions.DelPost(id))
   }
   const handleChangeName = (text: string) => {
-    dispatch(ChangeName(text))
+    dispatch(Actions.ChangeName(text))
   }
   const handleSub = () => {
-    dispatch(Subscribe(id))
+    dispatch(Actions.Subscribe(id))
   }
   const handleUnsub = () => {
-    dispatch(Unsubscribe(id))
+    dispatch(Actions.Unsubscribe(id))
   }
   const handleSignOut = () => {
-    dispatch(SignOut())
+    dispatch(Actions.SignOut())
   }
 
   return (

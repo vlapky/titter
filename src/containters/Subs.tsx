@@ -8,15 +8,10 @@ import '../styles/Subs.scss'
 export const Subs: React.FC = () => {
   const { id, subs } = useParams<IRouteParams>()
   const users = useSelector((state: IState) => state.users)
-  const subsList = GetSubsList(id, subs, users)
-
-  function GetSubsList(userId: string, subsType: string, users: any) {
-    const subs = users.byId[userId][subsType]
-    return subs.map((id: string) => ({
-      userId: id,
-      name: users.byId[id].name,
-    }))
-  }
+  const subsList = users.byId[id][subs].map((id: string) => ({
+    userId: id,
+    name: users.byId[id].name,
+  }))
 
   return (
     <div className="Subs">

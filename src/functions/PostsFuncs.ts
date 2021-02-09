@@ -1,5 +1,5 @@
-const PostsFuncs = {
-  ExtractPost: function ExtractPost(id: string, posts: any, users: any) {
+export const PostsFuncs = {
+  ExtractPost: function (id: string, posts: any, users: any) {
     let postData = posts.byId[id]
     return {
       id: postData.id,
@@ -10,25 +10,16 @@ const PostsFuncs = {
     }
   },
 
-  FilterUsersPosts: function FilterUsersPosts(
-    usersIds: Array<string>,
-    posts: any
-  ) {
+  FilterUsersPosts: function (usersIds: Array<string>, posts: any) {
     return posts.allIds.filter((id: string) =>
       usersIds.includes(posts.byId[id].author)
     )
   },
 
-  GeneratePosts: function GeneratePosts(
-    postsIds: Array<string>,
-    posts: any,
-    users: any
-  ) {
+  GeneratePosts: function (postsIds: Array<string>, posts: any, users: any) {
     let postsArray = postsIds.map((id: string) => {
       return this.ExtractPost(id, posts, users)
     })
     return postsArray
   },
 }
-
-export default PostsFuncs

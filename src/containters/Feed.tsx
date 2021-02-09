@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { IState } from '../interfaces/IState'
 import { FeedButtons } from '../components/FeedButtons'
-import { LikePost } from '../redux/actions/LikePost'
-import { DelPost } from '../redux/actions/DelPost'
-import PostsFuncs from '../functions/PostsFuncs'
+import { PostsFuncs } from '../functions/PostsFuncs'
+import { Actions } from '../redux/Actions'
 
 export const Feed: React.FC = () => {
   const users = useSelector((state: IState) => state.users)
@@ -27,11 +26,11 @@ export const Feed: React.FC = () => {
   )
 
   const handleLikePost = (id: string) => {
-    dispatch(LikePost(id))
+    dispatch(Actions.LikePost(id))
   }
 
   const handleDelPost = (id: string) => {
-    dispatch(DelPost(id))
+    dispatch(Actions.DelPost(id))
   }
 
   return (

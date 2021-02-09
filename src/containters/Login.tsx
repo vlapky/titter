@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { SignIn } from '../redux/actions/SingIn'
+import { Actions } from '../redux/Actions'
 import '../styles/Login.scss'
 
 export const Login: React.FC = () => {
@@ -13,14 +13,14 @@ export const Login: React.FC = () => {
     changeSignIn(e.target.value)
   }
   const handleSend = () => {
-    dispatch(SignIn(signInValue))
+    dispatch(Actions.SignIn(signInValue))
     changeSignIn('')
   }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       if (acceptSend) {
-        dispatch(SignIn(signInValue))
+        dispatch(Actions.SignIn(signInValue))
         changeSignIn('')
       }
     }

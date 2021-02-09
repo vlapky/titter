@@ -1,5 +1,5 @@
 import React from 'react'
-import IInputProps from '../interfaces/IInputProps'
+import { IInputProps } from '../interfaces/IInputProps'
 import '../styles/Input.scss'
 
 export const Input: React.FC<IInputProps> = ({ type, send, cancel }) => {

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { InitialState } from './InitialState'
-import rootReducer from './RootReducer'
+import { RootReducer } from './RootReducer'
 
 const loadFromLocalStorage: any = () => {
   try {
@@ -24,7 +24,7 @@ const loadState = loadFromLocalStorage()
 const state = loadState ? loadState : InitialState
 
 export const Store = configureStore({
-  reducer: rootReducer,
+  reducer: RootReducer,
   preloadedState: state,
 })
 
