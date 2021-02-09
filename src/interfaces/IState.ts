@@ -1,5 +1,5 @@
 interface IById {
-  [key: string]: any | null
+  [key: string]: any
 }
 
 interface IUsers {
@@ -14,7 +14,6 @@ interface IPosts {
 }
 
 export interface IState {
-  login: boolean
   users: IUsers
   posts: IPosts
 }

@@ -9,16 +9,16 @@ export const ProfileName: React.FC<IProfileName> = ({
 }) => {
   const [inputVisible, changeVisible] = React.useState<Boolean>(false)
 
-  const handleCancel = () => {
+  const handleClick = () => {
     if (profileState === 'YOUR') changeVisible(!inputVisible)
   }
   return (
     <>
-      <p onClick={handleCancel} className="Profile__user">
+      <p onClick={handleClick} className="Profile__user">
         {userName}
       </p>
       {inputVisible && (
-        <Input type="name" send={changeName} cancel={handleCancel} />
+        <Input type="name" send={changeName} cancel={handleClick} />
       )}
     </>
   )

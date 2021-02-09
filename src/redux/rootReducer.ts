@@ -1,16 +1,13 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createReducer } from '@reduxjs/toolkit'
+import { AddPost } from './actions/AddPost'
+import { ChangeName } from './actions/ChangeName'
+import { DelPost } from './actions/DelPost'
+import { SignOut } from './actions/SignOut'
+import { SignIn } from './actions/SingIn'
+import { Subscribe } from './actions/Subscribe'
+import { Unsubscribe } from './actions/Unsubscribe'
+import { LikePost } from './actions/LikePost'
 import { InitialState } from './InitialState'
-
-export const SignIn = createAction<string>('SIGN_IN')
-export const SignOut = createAction<void>('SIGN_OUT')
-
-export const Subscribe = createAction<string>('SUB')
-export const Unsubscribe = createAction<string>('UNSUB')
-
-export const AddPost = createAction<Object>('ADD_POST')
-export const DelPost = createAction<string>('DEL_POST')
-export const LikePost = createAction<string>('LIKE_POST')
-export const ChangeName = createAction<string>('CHANGE_NAME')
 
 export default createReducer(InitialState, {
   [SignIn.type]: (state, action) => {
@@ -19,47 +16,48 @@ export default createReducer(InitialState, {
       let user = state.users.byId[id]
       if (user.name === action.payload) {
         state.users.currentUser = id
-        state.login = true
       }
     })
     //Регистрация нового пользователя
-    if (!state.login) {
+    if (state.users.currentUser === '') {
       const newUserId: string = `user${state.users.allIds.length + 1}`
 
       state.users.allIds.push(newUserId)
       state.users.byId[newUserId] = {
         name: action.payload,
-        subsYou: [],
-        subsMe: [],
+        subscribedTo: [],
+        subscribers: [],
       }
 
       state.users.currentUser = newUserId
-      state.login = true
     }
   },
 
   [SignOut.type]: (state) => {
     state.users.currentUser = ''
-    state.login = false
   },
 
   [Subscribe.type]: (state, action) => {
     const currentUser = state.users.currentUser
     const subUser = action.payload
 
-    state.users.byId[currentUser].subsYou.push(subUser)
-    state.users.byId[subUser].subsMe.push(currentUser)
+    state.users.byId[currentUser].subscribedTo.push(subUser)
+    state.users.byId[subUser].subscribers.push(currentUser)
   },
 
   [Unsubscribe.type]: (state, action) => {
     const currentUser = state.users.currentUser
     const subUser = action.payload
 
-    const indexSubUser = state.users.byId[currentUser].subsYou.indexOf(subUser)
-    state.users.byId[currentUser].subsYou.splice(indexSubUser, 1)
+    const indexSubUser = state.users.byId[currentUser].subscribedTo.indexOf(
+      subUser
+    )
+    state.users.byId[currentUser].subscribedTo.splice(indexSubUser, 1)
 
-    const indexCurUser = state.users.byId[subUser].subsMe.indexOf(currentUser)
-    state.users.byId[subUser].subsMe.splice(indexCurUser, 1)
+    const indexCurUser = state.users.byId[subUser].subscribers.indexOf(
+      currentUser
+    )
+    state.users.byId[subUser].subscribers.splice(indexCurUser, 1)
   },
 
   [AddPost.type]: (state, action) => {
@@ -76,10 +74,9 @@ export default createReducer(InitialState, {
 
   [DelPost.type]: (state, action) => {
     const delPostId = action.payload
-
     const indexDelPost = state.posts.allIds.indexOf(delPostId)
-    state.posts.allIds.splice(indexDelPost, 1)
 
+    state.posts.allIds.splice(indexDelPost, 1)
     delete state.posts.byId[delPostId]
   },
 

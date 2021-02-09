@@ -1,15 +1,15 @@
 import React from 'react'
 import './styles/App.scss'
+import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { IState } from './interfaces/IState'
 import { Login } from './containters/Login'
 import { Feed } from './containters/Feed'
 import { Profile } from './containters/Profile'
 import { Subs } from './containters/Subs'
-import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { IState } from './interfaces/IState'
 
 const App: React.FC = () => {
-  const loginUser = useSelector((state: IState) => state.login)
+  const loginUser = useSelector((state: IState) => state.users.currentUser)
   return (
     <main className="App">
       <Router>

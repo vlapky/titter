@@ -1,13 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { IPostsProps } from '../interfaces/IPostProps'
 import del from '../icons/close.svg'
 import like from '../icons/heart.svg'
 import '../styles/Post.scss'
-import { Link } from 'react-router-dom'
 
 export const Posts: React.FC<IPostsProps> = ({
   posts,
-  acceptDel,
   likePost,
   delPost,
   currentUser,

@@ -1,13 +1,29 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { SignIn } from '../redux/RootReducer'
+import { SignIn } from '../redux/actions/SingIn'
 import '../styles/Login.scss'
 
 export const Login: React.FC = () => {
   const dispatch = useDispatch()
   const [signInValue, changeSignIn] = React.useState('')
+
+  const acceptSend = signInValue.length > 3
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     changeSignIn(e.target.value)
+  }
+  const handleSend = () => {
+    dispatch(SignIn(signInValue))
+    changeSignIn('')
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      if (acceptSend) {
+        dispatch(SignIn(signInValue))
+        changeSignIn('')
+      }
+    }
   }
 
   return (
@@ -19,16 +35,13 @@ export const Login: React.FC = () => {
         maxLength={12}
         value={signInValue}
         onChange={handleChange}
+        onKeyPress={handleKeyPress}
         className="Login__input"
         id="name"
         type="text"
         placeholder="vlapky"
       />
-      <button
-        disabled={!(signInValue.length > 3)}
-        onClick={() => dispatch(SignIn(signInValue))}
-        className="button"
-      >
+      <button disabled={!acceptSend} onClick={handleSend} className="button">
         Продолжить
       </button>
     </div>

@@ -1,11 +1,7 @@
 import React from 'react'
+import { IFeedButtonsProps } from '../interfaces/IFeedButtonsProps'
 
-interface FeedButtonsProps {
-  postsType: string
-  changeType: any
-}
-
-export const FeedButtons: React.FC<FeedButtonsProps> = ({
+export const FeedButtons: React.FC<IFeedButtonsProps> = ({
   postsType,
   changeType,
 }) => {

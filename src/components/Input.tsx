@@ -9,10 +9,22 @@ export const Input: React.FC<IInputProps> = ({ type, send, cancel }) => {
     changeText(e.target.value)
   }
 
-  const handleAdd = () => {
-    send(text)
-    changeText('')
-    cancel()
+  const handleSend = () => {
+    if (acceptSend) {
+      send(text)
+      changeText('')
+      cancel()
+    }
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      if (acceptSend) {
+        send(text)
+        changeText('')
+        cancel()
+      }
+    }
   }
 
   let acceptSend = text.length > 3
@@ -25,6 +37,7 @@ export const Input: React.FC<IInputProps> = ({ type, send, cancel }) => {
         autoFocus
         value={text}
         onChange={handleChange}
+        onKeyPress={handleKeyPress}
         maxLength={maxLength}
         placeholder={
           type === 'post' ? 'Новый пост' : type === 'name' ? 'Новое имя' : ''
@@ -33,7 +46,7 @@ export const Input: React.FC<IInputProps> = ({ type, send, cancel }) => {
       />
       <div className="Input__buttons">
         <button
-          onClick={handleAdd}
+          onClick={handleSend}
           disabled={!acceptSend}
           className="button button_send"
         >

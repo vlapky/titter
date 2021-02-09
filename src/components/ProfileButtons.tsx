@@ -10,7 +10,6 @@ export const ProfileButtons: React.FC<IProfileButtonsProps> = ({
   handleUnsub,
 }) => {
   const [inputVisible, changeVisible] = React.useState<Boolean>(false)
-  console.log(handleSub)
 
   return (
     <>

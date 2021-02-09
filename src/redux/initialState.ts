@@ -1,12 +1,11 @@
 import { IState } from '../interfaces/IState'
 
 export const InitialState: IState = {
-  login: false,
   users: {
     currentUser: '',
     byId: {
-      user1: { name: 'vlapky', subsYou: [], subsMe: ['user2'] },
-      user2: { name: 'Kiva', subsYou: ['user1'], subsMe: [] },
+      user1: { name: 'vlapky', subscribedTo: [], subscribers: ['user2'] },
+      user2: { name: 'Kiva', subscribedTo: ['user1'], subscribers: [] },
     },
     allIds: ['user1', 'user2'],
   },
