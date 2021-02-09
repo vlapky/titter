@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit'
 
 export const Actions = {
-  AddPost: createAction<Object>('ADD_POST'),
+  AddPost: createAction<string>('ADD_POST'),
   ChangeName: createAction<string>('CHANGE_NAME'),
   DelPost: createAction<string>('DEL_POST'),
   LikePost: createAction<string>('LIKE_POST'),
