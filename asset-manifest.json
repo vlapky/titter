@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/titter/static/css/main.4f92c573.chunk.css",
-    "main.js": "/titter/static/js/main.3b18bcc5.chunk.js",
-    "main.js.map": "/titter/static/js/main.3b18bcc5.chunk.js.map",
+    "main.js": "/titter/static/js/main.4d105d78.chunk.js",
+    "main.js.map": "/titter/static/js/main.4d105d78.chunk.js.map",
     "runtime-main.js": "/titter/static/js/runtime-main.2ed22fd8.js",
     "runtime-main.js.map": "/titter/static/js/runtime-main.2ed22fd8.js.map",
-    "static/js/2.7efc3895.chunk.js": "/titter/static/js/2.7efc3895.chunk.js",
-    "static/js/2.7efc3895.chunk.js.map": "/titter/static/js/2.7efc3895.chunk.js.map",
+    "static/js/2.90e53929.chunk.js": "/titter/static/js/2.90e53929.chunk.js",
+    "static/js/2.90e53929.chunk.js.map": "/titter/static/js/2.90e53929.chunk.js.map",
     "index.html": "/titter/index.html",
     "static/css/main.4f92c573.chunk.css.map": "/titter/static/css/main.4f92c573.chunk.css.map",
-    "static/js/2.7efc3895.chunk.js.LICENSE.txt": "/titter/static/js/2.7efc3895.chunk.js.LICENSE.txt",
+    "static/js/2.90e53929.chunk.js.LICENSE.txt": "/titter/static/js/2.90e53929.chunk.js.LICENSE.txt",
     "static/media/close.1d546531.svg": "/titter/static/media/close.1d546531.svg",
     "static/media/heart.fb824694.svg": "/titter/static/media/heart.fb824694.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.2ed22fd8.js",
-    "static/js/2.7efc3895.chunk.js",
+    "static/js/2.90e53929.chunk.js",
     "static/css/main.4f92c573.chunk.css",
-    "static/js/main.3b18bcc5.chunk.js"
+    "static/js/main.4d105d78.chunk.js"
   ]
 }
