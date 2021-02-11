@@ -25,14 +25,6 @@ export const Feed: React.FC = () => {
     users
   )
 
-  const handleLikePost = (id: string) => {
-    dispatch(Actions.LikePost(id))
-  }
-
-  const handleDelPost = (id: string) => {
-    dispatch(Actions.DelPost(id))
-  }
-
   return (
     <div className="Feed">
       <Link className="link" to={`/${currentUser}`}>
@@ -40,10 +32,10 @@ export const Feed: React.FC = () => {
       </Link>
       <FeedButtons postsType={postsType} changeType={changePostsType} />
       <Posts
-        posts={postsType === 'all' ? allPosts : subsPosts}
+        postsView={postsType === 'all' ? allPosts : subsPosts}
         currentUser={currentUser}
-        likePost={handleLikePost}
-        delPost={handleDelPost}
+        likePost={(id) => dispatch(Actions.LikePost(id))}
+        delPost={(id) => dispatch(Actions.DelPost(id))}
       />
     </div>
   )

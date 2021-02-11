@@ -4,38 +4,38 @@ import del from '../icons/close.svg'
 import like from '../icons/heart.svg'
 import '../styles/Post.scss'
 
-interface IPost {
+interface IPostView {
   id: string
   authorId: string
-  author: string
+  authorName: string
   text: string
   liked: Array<string>
 }
 
 interface IPostsProps {
-  posts: Array<IPost>
+  postsView: Array<IPostView>
   currentUser: string
   likePost: (id: string) => void
   delPost: (id: string) => void
 }
 
 export const Posts: React.FC<IPostsProps> = ({
-  posts,
+  postsView,
   likePost,
   delPost,
   currentUser,
 }) => {
   return (
     <ul>
-      {posts
+      {postsView
         .slice(0)
         .reverse()
-        .map(({ id, authorId, author, text, liked }) => (
+        .map(({ id, authorId, authorName, text, liked }) => (
           <li key={id} className="Post">
             <article>
               <div className="Post__head">
                 <Link className="Post__head_user" to={`/${authorId}`}>
-                  {author}
+                  {authorName}
                 </Link>
                 {currentUser === authorId && (
                   <img

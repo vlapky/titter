@@ -34,49 +34,27 @@ export const Profile: React.FC = () => {
   const userPosts = PostsFuncs.GeneratePosts(userPostsIds, posts, users)
   const userName = users.byId[id].name
 
-  const handleLikePost = (id: string) => {
-    dispatch(Actions.LikePost(id))
-  }
-  const handleAddPost = (text: string) => {
-    dispatch(Actions.AddPost(text))
-  }
-  const handleDelPost = (id: string) => {
-    dispatch(Actions.DelPost(id))
-  }
-  const handleChangeName = (text: string) => {
-    dispatch(Actions.ChangeName(text))
-  }
-  const handleSub = () => {
-    dispatch(Actions.Subscribe(id))
-  }
-  const handleUnsub = () => {
-    dispatch(Actions.Unsubscribe(id))
-  }
-  const handleSignOut = () => {
-    dispatch(Actions.SignOut())
-  }
-
   return (
     <div className="Profile">
       <ProfileLinks subs={subs} curId={curId} />
       <ProfileName
         userName={userName}
         profileState={profileState}
-        changeName={handleChangeName}
+        changeName={(text) => dispatch(Actions.ChangeName(text))}
       />
       <ProfileSubs id={id} users={users} />
       <ProfileButtons
         profileState={profileState}
-        handleAddPost={handleAddPost}
-        handleSub={handleSub}
-        handleUnsub={handleUnsub}
-        handleSignOut={handleSignOut}
+        handleAddPost={(text) => dispatch(Actions.AddPost(text))}
+        handleSub={() => dispatch(Actions.Subscribe(id))}
+        handleUnsub={() => dispatch(Actions.Unsubscribe(id))}
+        handleSignOut={() => dispatch(Actions.SignOut())}
       />
       <Posts
-        posts={userPosts}
+        postsView={userPosts}
         currentUser={users.currentUser}
-        likePost={handleLikePost}
-        delPost={handleDelPost}
+        likePost={(id) => dispatch(Actions.LikePost(id))}
+        delPost={(id) => dispatch(Actions.DelPost(id))}
       />
     </div>
   )

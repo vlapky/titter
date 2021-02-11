@@ -7,7 +7,7 @@ export const PostsFuncs = {
     return {
       id: postData.id,
       authorId: postData.author,
-      author: users.byId[postData.author].name,
+      authorName: users.byId[postData.author].name,
       text: postData.text,
       liked: postData.liked.map((id: string) => users.byId[id].name),
     }
